@@ -1,0 +1,16 @@
+# declare active currencies
+currencies:
+  - title: Dollar
+    slug: usd
+    symbol: $
+    active: 1
+
+  - title: Euro
+    slug: euro
+    symbol: €
+    active: 1
+
+  - title: Lei
+    slug: lei
+    symbol: @
+    active: 1
