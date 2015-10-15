@@ -15,7 +15,6 @@ class ShopServiceProvider extends ServiceProvider {
             __DIR__.'/../configuration' => config_path('yaml/shop'),
         ]);
 
-
         $this->publishes([
             __DIR__ . DIRECTORY_SEPARATOR . '../migrations/' => base_path('database/migrations')
         ], 'migrations');
