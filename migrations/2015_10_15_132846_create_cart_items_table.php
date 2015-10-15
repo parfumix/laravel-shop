@@ -18,6 +18,8 @@ class CreateCartItemsTable extends Migration {
             $table->string('title');
             $table->integer('quantity');
 
+            $table->timestamps();
+
             $table->foreign('cart_id')->references('id')->on('carts')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
