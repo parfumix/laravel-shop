@@ -18,10 +18,10 @@ class CreateProductTranslationsTable extends Migration {
             $table->string('title');
             $table->text('description');
 
-            $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
 
-            $table->unique(['media_id', 'language_id']);
+            $table->unique(['product_id', 'language_id']);
         });
     }
 
