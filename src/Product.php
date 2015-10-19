@@ -37,7 +37,7 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     /**
      * @var array
      */
-    public $fillable = [];
+    public $fillable = ['active'];
 
 
 }

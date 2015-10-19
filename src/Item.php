@@ -19,7 +19,7 @@ class Item extends Model {
     /**
      * @var array
      */
-    public $fillable = ['cart_id', 'currency_id', 'title', 'quantity'];
+    public $fillable = ['cart_id', 'title', 'quantity'];
 
 
 }
