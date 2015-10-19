@@ -11,7 +11,8 @@ class ShopServiceProvider extends ServiceProvider {
      * Publish resources.
      */
     public function boot() {
-        $this->loadRoutes();
+        $this->loadRoutes()
+            ->loadViews();
 
         $this->publishes([
             __DIR__.'/../configuration' => config_path('yaml/shop'),
@@ -61,5 +62,20 @@ class ShopServiceProvider extends ServiceProvider {
         return $this;
     }
 
+    /**
+     * Load views .
+     *
+     */
+    protected function loadViews() {
+        $this->loadViewsFrom(__DIR__.'/../views', 'shop');
+    }
+
+    /**
+     * Register widgets .
+     *
+     */
+    protected function registerWidgets() {
+
+    }
 
 }
