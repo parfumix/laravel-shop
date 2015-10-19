@@ -13,7 +13,6 @@ class CreateCartItemsTable extends Migration {
         Schema::create('cart_items', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_id')->unsigned();
-            $table->integer('currency_id')->unsigned();
 
             $table->string('title');
             $table->integer('quantity');
@@ -21,10 +20,6 @@ class CreateCartItemsTable extends Migration {
             $table->timestamps();
 
             $table->foreign('cart_id')->references('id')->on('carts')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('currency_id')->references('id')->on('currencies')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

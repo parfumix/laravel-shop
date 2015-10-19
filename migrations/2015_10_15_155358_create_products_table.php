@@ -12,6 +12,14 @@ class CreateProductsTable extends Migration {
     public function up() {
         Schema::create('products', function(BluePrint $table) {
             $table->increments('id');
+
+            $table->integer('currency_id')->unsigned();
+
+            $table->tinyInteger('active')->default(0);
+
+            $table->foreign('currency_id')->references('id')->on('currencies')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
