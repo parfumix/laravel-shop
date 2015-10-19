@@ -11,6 +11,8 @@ class ShopServiceProvider extends ServiceProvider {
      * Publish resources.
      */
     public function boot() {
+        $this->loadRoutes();
+
         $this->publishes([
             __DIR__.'/../configuration' => config_path('yaml/shop'),
         ]);
@@ -45,5 +47,19 @@ class ShopServiceProvider extends ServiceProvider {
 
         return $this;
     }
+
+    /**
+     * Load routes .
+     *
+     * @return $this
+     */
+    protected function loadRoutes() {
+        /** Register routes . */
+        if (! $this->app->routesAreCached())
+            require __DIR__.'/../routes.php';
+
+        return $this;
+    }
+
 
 }
