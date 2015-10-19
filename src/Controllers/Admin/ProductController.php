@@ -3,6 +3,7 @@
 namespace Laravel\Shop\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Eloquent\Sortable\Sortable;
 use Laravel\Shop\Product;
 use Parfumix\TableManager;
 use Parfumix\FormBuilder;
@@ -17,7 +18,19 @@ class ProductController extends Controller {
         $this->repository = (new Product());
     }
 
+    /**
+     * Lists products .
+     *
+     * @return \Illuminate\View\View
+     */
     public function lists() {
-        dd(1);
+        $table = TableManager\table(
+            $this->repository, 'eloquent', [
+                'class' => 'table table-hover',
+                'sortable' => ($this->repository instanceof Sortable)
+            ]
+        );
+
+        return view('shop::products', compact('table'));
     }
 }
