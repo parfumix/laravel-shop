@@ -1,6 +1,6 @@
 <?php
 
-namespace Flysap\Media\Controllers\Admin;
+namespace Laravel\Shop\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Laravel\Shop\Product;
