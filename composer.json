@@ -23,11 +23,21 @@
     {
       "type": "git",
       "url": "git@github.com:parfumix/eloquent-meta.git"
+    },
+    {
+      "type": "git",
+      "url": "git@github.com:parfumix/eloquent-sortable.git"
+    },
+    {
+      "type": "git",
+      "url" : "git@github.com:parfumix/table-manager.git"
     }
   ],
   "require": {
     "parfumix/eloquent-imageable": "dev-master",
     "parfumix/eloquent-meta": "dev-master",
+    "parfumix/eloquent-sortable": "dev-master",
+    "parfumix/table-manager": "dev-master",
     "robclancy/presenter": "1.3.*",
     "symfony/yaml": "~2.7",
     "flysap/application": "dev-master",
