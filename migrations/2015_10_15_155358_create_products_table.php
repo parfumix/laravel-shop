@@ -13,7 +13,7 @@ class CreateProductsTable extends Migration {
         Schema::create('products', function(BluePrint $table) {
             $table->increments('id');
 
-            $table->integer('currency_id')->unsigned();
+            $table->integer('currency_id')->unsigned()->nullable()->default(null);
 
             $table->tinyInteger('active')->default(0);
             $table->integer('position');
