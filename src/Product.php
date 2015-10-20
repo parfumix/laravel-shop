@@ -13,6 +13,7 @@ use Eloquent\Translatable\TranslatableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Meta\Eloquent\MetaSeoable;
 use Laravel\Meta\Eloquent\MetaSeoTrait;
+use Parfumix\FormBuilder as Form;
 
 class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSeoable, Sortable {
 
@@ -42,6 +43,17 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      * @var array
      */
     public $fillable = ['active'];
+
+    /**
+     * Editable fields .
+     *
+     * @return array
+     */
+    public function skyEdit() {
+        return [
+            'active' => Form\element_checkbox('Active', ['value' => $this->active]),
+        ];
+    }
 
     /**
      * @return array
