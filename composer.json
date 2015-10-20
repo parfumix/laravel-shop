@@ -31,6 +31,10 @@
     {
       "type": "git",
       "url" : "git@github.com:parfumix/table-manager.git"
+    },
+    {
+      "type": "git",
+      "url" : "git@github.com:parfumix/form-builder.git"
     }
   ],
   "require": {
@@ -38,6 +42,7 @@
     "parfumix/eloquent-meta": "dev-master",
     "parfumix/eloquent-sortable": "dev-master",
     "parfumix/table-manager": "dev-master",
+    "parfumix/form-builder": "dev-master",
     "robclancy/presenter": "1.3.*",
     "symfony/yaml": "~2.7",
     "flysap/application": "dev-master",
