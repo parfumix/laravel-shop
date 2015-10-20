@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration {
             $table->integer('currency_id')->unsigned();
 
             $table->tinyInteger('active')->default(0);
+            $table->integer('position');
 
             $table->foreign('currency_id')->references('id')->on('currencies')
                 ->onDelete('cascade')
