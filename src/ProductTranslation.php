@@ -19,7 +19,7 @@ class ProductTranslation extends Model {
     /**
      * @var array
      */
-    public $fillable = ['title', 'description'];
+    public $fillable = ['product_id', 'language_id', 'title', 'description'];
 
 
 }

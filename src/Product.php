@@ -71,6 +71,13 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
         }]];
     }
 
+    public function skyFilter() {
+        return [
+            'price' => ['type' => 'text'],
+            'active' => ['type' => 'checkbox'],
+        ];
+    }
+
     /**
      * Return lists of widgets for current page .
      *
@@ -95,4 +102,5 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     public function currency() {
         return $this->belongsTo(Currency::class, 'currency_id', 'id');
     }
+
 }
