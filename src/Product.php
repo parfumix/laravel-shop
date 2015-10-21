@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Meta\Eloquent\MetaSeoable;
 use Laravel\Meta\Eloquent\MetaSeoTrait;
 use Laravel\Relations\RelationTrait;
+use Laravel\Shop\Presenters\ProductPresenter;
 use Parfumix\FormBuilder as Form;
 
 class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSeoable, Sortable, ScaffoldAble {
@@ -72,6 +73,13 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      */
     public function widgets() {
         return [];
+    }
+
+    /**
+     * @return ProductPresenter
+     */
+    public function present() {
+        return new ProductPresenter($this);
     }
 
     /**
