@@ -5,10 +5,11 @@ namespace Laravel\Shop;
 use Flysap\Scaffold\ScaffoldAble;
 use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Relations\RelationTrait;
 
 class Cart extends Model implements ScaffoldAble {
 
-    use ScaffoldTrait;
+    use ScaffoldTrait, RelationTrait;
 
     /**
      * @var string
