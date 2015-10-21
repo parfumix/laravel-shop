@@ -13,7 +13,6 @@ class CreateCartsTable extends Migration {
         Schema::create('carts', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable()->default(null);
-            $table->integer('session_id')->nullable()->default(null);
             $table->integer('product_id')->unsigned();
 
             $table->string('title');
