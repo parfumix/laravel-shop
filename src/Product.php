@@ -15,11 +15,12 @@ use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Meta\Eloquent\MetaSeoable;
 use Laravel\Meta\Eloquent\MetaSeoTrait;
+use Laravel\Relations\RelationTrait;
 use Parfumix\FormBuilder as Form;
 
 class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSeoable, Sortable, ScaffoldAble {
 
-    use ImageAbleTrait, TranslatableTrait, MetaTrait, MetaSeoTrait, SortableTrait, ScaffoldTrait;
+    use ImageAbleTrait, TranslatableTrait, MetaTrait, MetaSeoTrait, SortableTrait, ScaffoldTrait, RelationTrait;
 
     /**
      * @var array
@@ -47,17 +48,6 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     public $fillable = ['price', 'active'];
 
     /**
-     * Editable fields .
-     *
-     * @return array
-     */
-    public function skyEdit() {
-        return [
-            'active' => Form\element_checkbox('Active', ['value' => $this->active]),
-        ];
-    }
-
-    /**
      * @return array
      */
     public function skyShow() {
@@ -75,11 +65,5 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
         }]];
     }
 
-    /**
-     * @return array
-     */
-    public function skyFilter() {
-        return ['active' => 'checkbox'];
-    }
 
 }
