@@ -7,12 +7,24 @@ use Laravel\Shop\Cart;
 trait ShopTrait {
 
     /**
+     * On boot add new relation .
+     */
+    public function boot() {
+        if( isset($this->relation) )
+            $relation = $this->relation;
+
+        $this->relation = array_merge($relation, [
+            'products'
+        ]);
+    }
+
+    /**
      * Get cart items .
      *
      * @return mixed
      */
     public function products() {
-        return $this->hasMany(Cart::class, 'id', 'user_id');
+        return $this->hasMany(Cart::class, 'user_id', 'id');
     }
 
     /**

@@ -24,16 +24,6 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     use ImageAbleTrait, TranslatableTrait, MetaTrait, MetaSeoTrait, SortableTrait, ScaffoldTrait, RelationTrait;
 
     /**
-     * @var array
-     */
-    protected $translatedAttributes = [
-        'title',
-        'description'
-    ];
-
-    protected $translationClass = ProductTranslation::class;
-
-    /**
      * @var string
      */
     protected $table = 'products';
@@ -47,6 +37,21 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      * @var array
      */
     public $fillable = ['price', 'active'];
+
+    /**
+     * @var array
+     */
+    public $relation = ['currency'];
+
+    /**
+     * @var array
+     */
+    protected $translatedAttributes = [
+        'title',
+        'description'
+    ];
+
+    protected $translationClass = ProductTranslation::class;
 
     /**
      * @return array
@@ -88,6 +93,6 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function currency() {
-        return $this->belongsTo(Currency::class, 'id', 'currency_id');
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
     }
 }
