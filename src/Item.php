@@ -2,9 +2,13 @@
 
 namespace Laravel\Shop;
 
+use Flysap\Scaffold\ScaffoldAble;
+use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Item extends Model {
+class Item extends Model implements ScaffoldAble {
+
+    use ScaffoldTrait;
 
     /**
      * @var string

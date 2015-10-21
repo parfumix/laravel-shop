@@ -10,14 +10,16 @@ use Eloquent\Sortable\Sortable;
 use Eloquent\Sortable\SortableTrait;
 use Eloquent\Translatable\Translatable;
 use Eloquent\Translatable\TranslatableTrait;
+use Flysap\Scaffold\ScaffoldAble;
+use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Meta\Eloquent\MetaSeoable;
 use Laravel\Meta\Eloquent\MetaSeoTrait;
 use Parfumix\FormBuilder as Form;
 
-class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSeoable, Sortable {
+class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSeoable, Sortable, ScaffoldAble {
 
-    use ImageAbleTrait, TranslatableTrait, MetaTrait, MetaSeoTrait, SortableTrait;
+    use ImageAbleTrait, TranslatableTrait, MetaTrait, MetaSeoTrait, SortableTrait, ScaffoldTrait;
 
     /**
      * @var array
@@ -42,7 +44,7 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     /**
      * @var array
      */
-    public $fillable = ['active'];
+    public $fillable = ['price', 'active'];
 
     /**
      * Editable fields .
