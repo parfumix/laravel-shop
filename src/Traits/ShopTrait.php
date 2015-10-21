@@ -14,7 +14,7 @@ trait ShopTrait {
             $relation = $this->relation;
 
         $this->relation = array_merge($relation, [
-            'products'
+            'carts'
         ]);
     }
 
@@ -23,9 +23,10 @@ trait ShopTrait {
      *
      * @return mixed
      */
-    public function products() {
+    public function carts() {
         return $this->hasMany(Cart::class, 'user_id', 'id');
     }
+
 
     /**
      * Add product to cart
@@ -34,18 +35,22 @@ trait ShopTrait {
      * @param array $attributes
      * @return mixed
      */
-    public function addProduct($product_id, array $attributes = array()) {
-
+    public function addItem($product_id, array $attributes = array()) {
+        return $this->carts()->save((new Cart([
+            'product_id' => $product_id
+        ] + $attributes)));
     }
 
     /**
      * Drop product from cart .
      *
      * @param $product_id
-     * @param array $attributes
      * @return mixed
      */
-    public function dropProduct($product_id, array $attributes = array()) {
+    public function dropItem($product_id) {
+        $product = $this->carts()->where('product_id', $product_id)
+            ->first();
 
+        return $product->delete();
     }
 }

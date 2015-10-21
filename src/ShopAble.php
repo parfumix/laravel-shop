@@ -11,7 +11,7 @@ interface ShopAble {
      * @param array $attributes
      * @return mixed
      */
-    public function addProduct($product_id, array $attributes = array());
+    public function addItem($product_id, array $attributes = array());
 
     /**
      * Drop product from cart .
@@ -20,5 +20,5 @@ interface ShopAble {
      * @param array $attributes
      * @return mixed
      */
-    public function dropProduct($product_id, array $attributes = array());
+    public function dropItem($product_id, array $attributes = array());
 }
