@@ -12,6 +12,9 @@ class Cart extends Model implements ScaffoldAble {
 
     use ScaffoldTrait, RelationTrait;
 
+    /**
+     * @var array
+     */
     public $relation = ['product'];
 
     /**

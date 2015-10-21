@@ -2,6 +2,7 @@
 
 namespace Laravel\Shop;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
 
@@ -34,6 +35,10 @@ class ShopServiceProvider extends ServiceProvider {
         Support\merge_yaml_config_from(
             config_path('yaml/shop/general.yaml') , 'laravel-shop'
         );
+
+        /** @var Register alias facade . $loader */
+        #$loader = AliasLoader::getInstance();
+        #$loader->alias('Widget', WidgetFacade::class);
     }
 
     /**
