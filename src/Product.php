@@ -65,5 +65,14 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
         }]];
     }
 
+    /**
+     * Return lists of widgets for current page .
+     *
+     * @return array
+     */
+    public function widgets() {
+        return [''];
+    }
+
 
 }
