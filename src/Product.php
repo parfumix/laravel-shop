@@ -71,8 +71,15 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      * @return array
      */
     public function widgets() {
-        return [''];
+        return [];
     }
 
-
+    /**
+     * Get currency instance .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency() {
+        return $this->belongsTo(Currency::class, 'id', 'currency_id');
+    }
 }
