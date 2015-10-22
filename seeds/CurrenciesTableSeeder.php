@@ -17,7 +17,7 @@ class CurrenciesTableSeeder extends Seeder {
         array_walk($currencies, function($options, $slug) {
             \Laravel\Shop\Currency::create([
                 'title'  => $options['title'],
-                'slug'   => $slug,
+                'slug'   => $options['slug'],
                 'symbol' => $options['symbol'],
                 'active' => $options['active'],
             ]);
