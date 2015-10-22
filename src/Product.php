@@ -71,6 +71,9 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
         }]];
     }
 
+    /**
+     * @return array
+     */
     public function skyFilter() {
         return [
             'price' => ['type' => 'text'],
