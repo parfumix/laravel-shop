@@ -21,8 +21,12 @@ class ShopServiceProvider extends ServiceProvider {
         ]);
 
         $this->publishes([
-            __DIR__ . DIRECTORY_SEPARATOR . '../migrations/' => base_path('database/migrations')
+            __DIR__ . DIRECTORY_SEPARATOR . '../migrations/' => database_path('migrations')
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__ . DIRECTORY_SEPARATOR . '../seeds/' => database_path('seeds')
+        ], 'seeds');
 
         $this->registerWidgets();
     }
