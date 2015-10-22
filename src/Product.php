@@ -84,7 +84,7 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      * @return array
      */
     public function widgets() {
-        return [];
+        return ['orders'];
     }
 
     /**
