@@ -30,7 +30,7 @@ class Cart extends Model implements ScaffoldAble {
     /**
      * @var array
      */
-    public $fillable = ['title', 'quantity'];
+    public $fillable = ['product_id', 'title', 'quantity'];
 
     /**
      * Return user instance .
