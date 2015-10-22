@@ -5,6 +5,7 @@ namespace Laravel\Shop;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
+use Laravel\Shop\Facades\CartFacade;
 
 class ShopServiceProvider extends ServiceProvider {
 
@@ -22,6 +23,8 @@ class ShopServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__ . DIRECTORY_SEPARATOR . '../migrations/' => base_path('database/migrations')
         ], 'migrations');
+
+        $this->registerWidgets();
     }
 
     /**
@@ -36,9 +39,16 @@ class ShopServiceProvider extends ServiceProvider {
             config_path('yaml/shop/general.yaml') , 'laravel-shop'
         );
 
+        /** Cart service rec to Ioc */
+        app()->bind('cart-service', function() {
+            return new CartService(
+                new Cart()
+            );
+        });
+
         /** @var Register alias facade . $loader */
-        #$loader = AliasLoader::getInstance();
-        #$loader->alias('Widget', WidgetFacade::class);
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Cart', CartFacade::class);
     }
 
     /**
@@ -80,7 +90,10 @@ class ShopServiceProvider extends ServiceProvider {
      *
      */
     protected function registerWidgets() {
-
+        app('widget-manager')->addWidget('orders', function() {
+            #@todo add real values .
+            return view('themes::widgets.uploads', ['value' => 11, 'title' => 'Orders']);
+        });
     }
 
 }

@@ -7,18 +7,18 @@ interface ShopAble {
     /**
      * Add product to cart
      *
-     * @param $product_id
+     * @param Product $product
      * @param array $attributes
      * @return mixed
+     * @internal param $product_id
      */
-    public function addItem($product_id, array $attributes = array());
+    public function inCart(Product $product, array $attributes = array());
 
     /**
      * Drop product from cart .
      *
-     * @param $product_id
-     * @param array $attributes
+     * @param Product $product
      * @return mixed
      */
-    public function dropItem($product_id, array $attributes = array());
+    public function outCart(Product $product);
 }
