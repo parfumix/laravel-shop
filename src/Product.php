@@ -41,7 +41,9 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
     /**
      * @var array
      */
-    public $relation = ['currency'];
+    public $relation = ['currency' => [
+        'fields' => ['title' => []]
+    ]];
 
     /**
      * @var array
@@ -68,7 +70,15 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
                 return $image->present()->render(['width' => '200px']);
 
             return $value;
-        }]];
+        }], 'currency_id' => ['label' => 'Currency', 'closure' => function($value, $elements) {
+            $currency = Currency::where('id', $value)
+                ->first();
+
+            if( $currency )
+                return $currency->title;
+
+            return $value;
+        }], 'active'];
     }
 
     /**
@@ -76,6 +86,7 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
      */
     public function skyFilter() {
         return [
+            'currency_id' => ['label' => 'Currency', 'type' => 'select', 'options' => Currency::all()->lists('slug', 'id')],
             'price' => ['type' => 'text'],
             'active' => ['type' => 'checkbox'],
         ];
