@@ -15,7 +15,14 @@ class Cart extends Model implements ScaffoldAble {
     /**
      * @var array
      */
-    public $relation = ['product'];
+    public $relation = [
+        'product'=> [
+            'fields' => ['title' => ['translatable' => true]],
+        ],
+        'user' => [
+            'fields' => ['email' => []],
+        ]
+    ];
 
     /**
      * @var string
@@ -47,7 +54,53 @@ class Cart extends Model implements ScaffoldAble {
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product() {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
+    /**
+     * @return array
+     */
+    public function skyFilter() {
+        return [
+            'user_id' => ['label' => 'Users', 'type' => 'select', 'options' => User::all()->lists('email', 'id')],
+            'title' => ['type' => 'text'],
+            'quantity' => ['type' => 'text'],
+            'created_at' => ['type' => 'date'],
+            'updated_at' => ['type' => 'date'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function skyShow() {
+        $eloquent = $this;
+
+        return ['id', 'title', 'quantity', 'product_id' => ['label' => 'Product', 'closure' => function($value, $elements) use($eloquent) {
+            $product = Product::where('id', $value)
+                ->first();
+
+            if( $product )
+                return $product->present()->formatTitle();
+
+            return $value;
+        }], 'user_id' => ['label' => 'User', 'closure' => function($value, $elements) use($eloquent) {
+            $user = User::where('id', $value)
+                ->first();
+
+            if( $user )
+                return $user->email;
+
+            return $value;
+        }]];
+    }
+
+    /**
+     * Editable fields .
+     *
+     * @return array
+     */
+    public function skyEdit() {
+        return ['title' => ['type' => 'text'], 'quantity' => ['type' => 'number']];
+    }
 }
