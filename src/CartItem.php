@@ -17,9 +17,6 @@ class CartItem extends Model implements ScaffoldAble {
     public $relation = [
         'currency' => [
             'fields' => ['title' => []]
-        ],
-        'cart' => [
-            'fields' => ['id' => []]
         ]
     ];
 
@@ -36,7 +33,7 @@ class CartItem extends Model implements ScaffoldAble {
     /**
      * @var array
      */
-    public $fillable = ['cart_id', 'product_id', 'quantity'];
+    public $fillable = ['cart_id', 'tax', 'product_id', 'quantity', 'attributes'];
 
     /**
      * Return instance .
@@ -81,25 +78,7 @@ class CartItem extends Model implements ScaffoldAble {
      * @return array
      */
     public function skyShow() {
-        $eloquent = $this;
-
-        return ['id', 'quantity', 'product_id' => ['label' => 'Product', 'closure' => function($value, $elements) use($eloquent) {
-            $product = Product::where('id', $value)
-                ->first();
-
-            if( $product )
-                return $product->present()->formatTitle();
-
-            return $value;
-        }], 'cart_id' => ['label' => 'Cart', 'closure' => function($value, $elements) use($eloquent) {
-            $cart = Cart::where('id', $value)
-                ->first();
-
-            if( $cart )
-                return $cart->id;
-
-            return $value;
-        }]];
+        return ['id', 'quantity', 'tax', 'attributes'];
     }
 
     /**
@@ -108,6 +87,6 @@ class CartItem extends Model implements ScaffoldAble {
      * @return array
      */
     public function skyEdit() {
-        return ['quantity' => ['type' => 'number']];
+        return ['quantity' => ['type' => 'number'], 'tax' => ['type' => 'text'], 'attributes' => ['type' => 'textarea']];
     }
 }
