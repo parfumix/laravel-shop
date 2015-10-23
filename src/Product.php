@@ -64,12 +64,17 @@ class Product extends Model implements ImageAble, Translatable, MetaAble, MetaSe
         return ['id', 'title', 'description', 'image' => ['closure' => function($value, $elements) use($eloquent) {
             $id = $elements['elements']['id'];
 
-            $image = $eloquent->where('id', $id)->first()->images()->orderBy('id', 'desc')->first();
+            if( ! $image = $eloquent->where('id', $id)->first()->images()
+                    ->where('is_main', 1)->orderBy('id', 'desc')->first() ) {
+                $image = $eloquent->where('id', $id)->first()->images()
+                    ->orderBy('id', 'desc')->first();
+            }
 
             if( $image )
                 return $image->present()->render(['width' => '200px']);
 
             return $value;
+
         }], 'currency_id' => ['label' => 'Currency', 'closure' => function($value, $elements) {
             $currency = Currency::where('id', $value)
                 ->first();

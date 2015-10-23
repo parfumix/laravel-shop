@@ -22,4 +22,5 @@ class Order extends Model implements ScaffoldAble {
      */
     public $timestamps = false;
 
+
 }
