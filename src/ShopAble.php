@@ -4,6 +4,10 @@ namespace Laravel\Shop;
 
 interface ShopAble {
 
+    /**
+     * @return mixed
+     */
+    public function authentificate();
 
     /**
      * Add product to cart
