@@ -16,11 +16,8 @@ class CartItem extends Model implements ScaffoldAble {
      * @var array
      */
     public $relation = [
-        'product'=> [
-            'fields' => ['title' => ['translatable' => true]],
-        ],
-        'cart' => [
-            'fields' => ['id' => []],
+        'currency' => [
+            'fields' => ['title' => []]
         ]
     ];
 
@@ -37,7 +34,7 @@ class CartItem extends Model implements ScaffoldAble {
     /**
      * @var array
      */
-    public $fillable = ['cart_id', 'product_id', 'title', 'quantity'];
+    public $fillable = ['cart_id', 'product_id', 'quantity'];
 
     /**
      * Return user instance .
@@ -58,13 +55,20 @@ class CartItem extends Model implements ScaffoldAble {
     }
 
     /**
+     * Get currency instance .
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function currency() {
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+    }
+
+    /**
      * @return array
      */
     public function skyFilter() {
         return [
-            'cart_id' => ['label' => 'Cart', 'type' => 'select', 'options' => Cart::all()->lists('id', 'id')],
-            'product_id' => ['label' => 'Users', 'type' => 'select', 'options' => Product::all()->lists('id', 'id')],
-            'title' => ['type' => 'text'],
+            'currency_id' => ['label' => 'Currency', 'type' => 'select', 'options' => Currency::all()->lists('slug', 'id')],
             'quantity' => ['type' => 'text'],
             'created_at' => ['type' => 'date'],
             'updated_at' => ['type' => 'date'],
@@ -77,7 +81,7 @@ class CartItem extends Model implements ScaffoldAble {
     public function skyShow() {
         $eloquent = $this;
 
-        return ['id', 'title', 'quantity', 'product_id' => ['label' => 'Product', 'closure' => function($value, $elements) use($eloquent) {
+        return ['id', 'quantity', 'product_id' => ['label' => 'Product', 'closure' => function($value, $elements) use($eloquent) {
             $product = Product::where('id', $value)
                 ->first();
 
@@ -102,6 +106,6 @@ class CartItem extends Model implements ScaffoldAble {
      * @return array
      */
     public function skyEdit() {
-        return ['title' => ['type' => 'text'], 'quantity' => ['type' => 'number']];
+        return ['quantity' => ['type' => 'number']];
     }
 }
