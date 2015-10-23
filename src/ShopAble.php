@@ -12,7 +12,7 @@ interface ShopAble {
      * @return mixed
      * @internal param $product_id
      */
-    public function inCart(Product $product, array $attributes = array());
+    public function toCart(Product $product, array $attributes = array());
 
     /**
      * Drop product from cart .
