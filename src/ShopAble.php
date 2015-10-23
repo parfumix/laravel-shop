@@ -4,6 +4,7 @@ namespace Laravel\Shop;
 
 interface ShopAble {
 
+
     /**
      * Add product to cart
      *

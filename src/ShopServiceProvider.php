@@ -2,8 +2,10 @@
 
 namespace Laravel\Shop;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
+use Laravel\Shop\Facades\CartFacade;
 
 class ShopServiceProvider extends ServiceProvider {
 
@@ -16,7 +18,7 @@ class ShopServiceProvider extends ServiceProvider {
 
         $this->publishes([
             __DIR__.'/../configuration' => config_path('yaml/shop'),
-        ]);
+        ], 'configuration');
 
         $this->publishes([
             __DIR__ . DIRECTORY_SEPARATOR . '../migrations/' => database_path('migrations')
@@ -47,6 +49,10 @@ class ShopServiceProvider extends ServiceProvider {
                 new Cart()
             );
         });
+
+        /** @var Register alias facade . $loader */
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Cart', CartFacade::class);
     }
 
     /**
