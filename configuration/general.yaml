@@ -14,3 +14,6 @@ currencies:
     slug: lei
     symbol: @
     active: 0
+
+# declare shopable class
+shopable_class: App\User
