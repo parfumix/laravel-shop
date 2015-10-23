@@ -12,7 +12,9 @@ class CreateCartsTable extends Migration {
     public function up() {
         Schema::create('carts', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable()->default(null);
+
+            $table->integer('shopable_id');
+            $table->string('shopable_type');
 
             $table->timestamps();
 
