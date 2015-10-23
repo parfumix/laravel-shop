@@ -37,6 +37,13 @@ class Cart extends Model implements ScaffoldAble {
     public $fillable = ['user_id', 'title', 'quantity'];
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items() {
+        return $this->hasMany(CartItem::class);
+    }
+
+    /**
      * Return user instance .
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
