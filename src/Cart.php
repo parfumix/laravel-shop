@@ -2,7 +2,6 @@
 
 namespace Laravel\Shop;
 
-use App\User;
 use Flysap\Scaffold\ScaffoldAble;
 use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -11,15 +10,6 @@ use Laravel\Relations\RelationTrait;
 class Cart extends Model implements ScaffoldAble {
 
     use ScaffoldTrait, RelationTrait;
-
-    /**
-     * @var array
-     */
-    public $relation = [
-        'user' => [
-            'fields' => ['email' => []],
-        ]
-    ];
 
     /**
      * @var string
@@ -34,7 +24,7 @@ class Cart extends Model implements ScaffoldAble {
     /**
      * @var array
      */
-    public $fillable = ['user_id', 'title', 'quantity'];
+    public $fillable = ['title', 'quantity'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -44,7 +34,7 @@ class Cart extends Model implements ScaffoldAble {
     }
 
     /**
-     * Return user instance .
+     * Return instance .
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -57,7 +47,6 @@ class Cart extends Model implements ScaffoldAble {
      */
     public function skyFilter() {
         return [
-            'user_id' => ['label' => 'Users', 'type' => 'select', 'options' => User::all()->lists('email', 'id')],
             'created_at' => ['type' => 'date'],
             'updated_at' => ['type' => 'date'],
         ];
@@ -67,17 +56,7 @@ class Cart extends Model implements ScaffoldAble {
      * @return array
      */
     public function skyShow() {
-        $eloquent = $this;
-
-        return ['id', 'user_id' => ['label' => 'User', 'closure' => function($value, $elements) use($eloquent) {
-            $user = User::where('id', $value)
-                ->first();
-
-            if( $user )
-                return $user->email;
-
-            return $value;
-        }]];
+        return ['id', 'shopable_id', 'shopable_type'];
     }
 
     /**

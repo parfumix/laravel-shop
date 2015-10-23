@@ -17,9 +17,6 @@ class CreateCartsTable extends Migration {
             $table->string('shopable_type');
 
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

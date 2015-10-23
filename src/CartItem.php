@@ -2,7 +2,6 @@
 
 namespace Laravel\Shop;
 
-use App\User;
 use Flysap\Scaffold\ScaffoldAble;
 use Flysap\Scaffold\Traits\ScaffoldTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +36,7 @@ class CartItem extends Model implements ScaffoldAble {
     public $fillable = ['cart_id', 'product_id', 'quantity'];
 
     /**
-     * Return user instance .
+     * Return instance .
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
