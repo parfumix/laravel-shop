@@ -16,9 +16,9 @@ class CreateCartItems extends Migration {
             $table->integer('product_id')->unsigned();
             $table->integer('currency_id')->unsigned()->nullable()->default(null);
 
-            $table->integer('tax');
+            $table->decimal('tax')->default(0);
             $table->integer('quantity');
-            $table->decimal('price');
+            $table->decimal('price')->default(0);
             $table->text('attributes');
 
             $table->index(['price']);
