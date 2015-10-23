@@ -89,4 +89,44 @@ class CartItem extends Model implements ScaffoldAble {
     public function skyEdit() {
         return ['quantity' => ['type' => 'number'], 'tax' => ['type' => 'text'], 'attributes' => ['type' => 'textarea']];
     }
+
+
+    /**
+     * Get single price .
+     *
+     * @param bool $includeTax
+     * @return int|mixed
+     */
+    public function getSinglePrice($includeTax = true) {
+        return $this->price + $includeTax ? $this->getSingleTax() : 0;
+    }
+
+    /**
+     * Get total price with taxes .
+     *
+     * @param bool $includeTax
+     * @return int|mixed
+     */
+    public function getTotalPrice($includeTax = true) {
+        return $this->getSinglePrice($includeTax) * $this->quantity;
+    }
+
+    /**
+     * Get total taxes .
+     *
+     * @return mixed
+     */
+    public function getTotalTax() {
+        return $this->getSingleTax() * $this->quantity;
+    }
+
+    /**
+     * Get single tax .
+     *
+     * @return mixed
+     */
+    public function getSingleTax() {
+        return $this->tax;
+    }
+
 }

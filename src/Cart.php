@@ -67,4 +67,37 @@ class Cart extends Model implements ScaffoldAble {
     public function skyEdit() {
         return [];
     }
+
+
+    /**
+     * Get total price with taxes
+     *
+     * @return float
+     */
+    public function totalPrice() {
+        $price = 0.00;
+
+        $items = $this->items;
+        $items->each(function($item) use(& $price) {
+            $price += $item->getTotalPrice();
+        });
+
+        return $price;
+    }
+
+    /**
+     * Get total tax
+     *
+     * @return float
+     */
+    public function totalTax() {
+        $tax = 0.00;
+
+        $items = $this->items;
+        $items->each(function($item) use(& $tax) {
+            $tax += $item->getTotalTax();
+        });
+
+        return $tax;
+    }
 }
