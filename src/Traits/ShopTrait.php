@@ -3,6 +3,7 @@
 namespace Laravel\Shop\Traits;
 
 use Laravel\Shop\Cart;
+use Laravel\Shop\CartItem;
 use Laravel\Shop\Events\AddedToCart;
 use Laravel\Shop\Events\RemoveFromCart;
 use Laravel\Shop\Product;
@@ -30,8 +31,8 @@ trait ShopTrait {
      *
      * @return mixed
      */
-    public function carts() {
-        return $this->hasMany(Cart::class, 'user_id', 'id');
+    public function cart() {
+        return $this->hasOne(Cart::class, 'user_id', 'id');
     }
 
     /**
@@ -41,13 +42,19 @@ trait ShopTrait {
      * @param array $attributes
      * @return mixed
      */
-    public function inCart(Product $product, array $attributes = array()) {
-        $cart = (new Cart([
-                'product_id' => $product->id
-            ] + $attributes));
+    public function toCart(Product $product, array $attributes = array()) {
+        if(! $cart = $this->cart()->first()) {
+            $cart = $this->cart()->save(
+              new Cart
+            );
+        }
 
-        $this->carts()
-            ->save($cart);
+        $item = (new CartItem([
+                'product_id' => $product->id
+            ] + array_merge($attributes, $product->toArray())));
+
+        $cart->items()
+            ->save($item);
 
         event(new AddedToCart($cart));
 
@@ -61,14 +68,19 @@ trait ShopTrait {
      * @return mixed
      */
     public function outCart(Product $product) {
-        $carts = $this->carts()
-            ->where('product_id', $product->id)
-            ->get();
+        if( $cart = $this->cart ) {
+            $items = $cart->items()
+                ->where('product_id', $product->id)
+                ->get();
 
-        $carts->each(function($cart) {
-            $cart->delete();
-        });
+            $hasItems = $items->count();
 
-        event(new RemoveFromCart);
+            $items->each(function($item) {
+                $item->delete();
+            });
+
+            if( $hasItems )
+                event(new RemoveFromCart);
+        }
     }
 }
