@@ -2,13 +2,27 @@
 
 namespace Laravel\Shop\Traits;
 
+use App\User;
 use Laravel\Shop\Cart;
 use Laravel\Shop\CartItem;
 use Laravel\Shop\Events\AddedToCart;
 use Laravel\Shop\Events\RemoveFromCart;
+use Laravel\Shop\Exceptions\CartException;
 use Laravel\Shop\Product;
 
 trait ShopTrait {
+
+    /**
+     * Authentificate user .
+     * @return mixed
+     * @throws CartException
+     */
+    public function authentificate() {
+        if( $this instanceof User )
+            return \Auth::user();
+
+        throw new CartException('Implement authentificate function.');
+    }
 
     /**
      * Get cart items .
