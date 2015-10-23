@@ -17,7 +17,7 @@ trait ShopTrait {
      */
     public function cart() {
         return $this->morphOne(
-            isset($this->shopableClass) ? $this->shopAbleClass : config('laravel-shop.shopable_class'), 'shopable'
+            Cart::class, 'shopable'
         );
     }
 

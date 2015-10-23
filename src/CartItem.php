@@ -17,6 +17,9 @@ class CartItem extends Model implements ScaffoldAble {
     public $relation = [
         'currency' => [
             'fields' => ['title' => []]
+        ],
+        'cart' => [
+            'fields' => ['id' => []]
         ]
     ];
 
